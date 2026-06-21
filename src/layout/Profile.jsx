@@ -1,8 +1,9 @@
-import { auth } from '../firebase-config'
-import { signOut,updateProfile } from 'firebase/auth'
+import { auth, db } from '../firebase-config'
+import { signOut } from 'firebase/auth'
+import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../authContext";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function getInitials(name = ''){
@@ -11,14 +12,15 @@ function getInitials(name = ''){
 
 export default function Profile(){
     const navigate = useNavigate();
-    const { user, userData } = useAuth();
+    const { user, userData, setUserData } = useAuth();
     const [editMode, setEditMode] = useState(false);
-    const [bio, setBio] = useState('Lover of movies. Add a short bio in your profile.');
+    const [bio, setBio] = useState(userData?.bio || 'add bio.');
+    const [name, setName] = useState(userData?.name || user.email);
+    
 
     async function logout(){
         try{
             await signOut(auth)
-            console.log('logging out...')
             navigate('/login')
         }
         catch(error){
@@ -29,32 +31,34 @@ export default function Profile(){
 
     async function updateProfileInfo(){
         setEditMode(false)
-        await updateProfile(user, {
-            bio: bio
-        });
+        await updateDoc(doc(db,"users", user.uid), {
+            bio: bio,
+            name:name});
+        setUserData(prev => ({
+        ...prev,
+        bio,
+        name}))
     }
+
 
     if(editMode){
         return(
             <main className="profile-page">
             <section className="profile-card">
                 <div className="profile-avatar">
-                    {userData?.photoURL ? (
-                        <img src={userData.photoURL} alt={`${userData?.name || 'User'} avatar`} />
-                    ) : (
-                        <div className="avatar-fallback">{getInitials(userData?.name || user?.email || 'U')}</div>
-                    )}
+                    <div className="avatar-fallback">{getInitials(name || user?.email || 'U')}</div>
                 </div>
                 <div className="profile-info">
-                    <h1 className="profile-name">{userData?.name || user?.email}</h1>
+                    <input 
+                    className='profile-name' 
+                    type="text" name="name" 
+                    value={name} onChange={(e)=>setName(e.target.value)} />
+
                     <p className="profile-email">{user?.email}</p>
                     <input 
                     className='profile-bio' 
                     type="text" name="bio" 
                     value={bio} onChange={(e)=>setBio(e.target.value)} />
-                    {/* <p className="profile-bio">
-                        {userData?.bio || 'Lover of movies. Add a short bio in your profile.'}
-                    </p> */}
                     <div className="profile-actions">
                         <button className="btn btn-primary" type="button" 
                         onClick={updateProfileInfo}>Save changes</button>
@@ -69,14 +73,10 @@ export default function Profile(){
         <main className="profile-page">
             <section className="profile-card">
                 <div className="profile-avatar">
-                    {userData?.photoURL ? (
-                        <img src={userData.photoURL} alt={`${userData?.name || 'User'} avatar`} />
-                    ) : (
-                        <div className="avatar-fallback">{getInitials(userData?.name || user?.email || 'U')}</div>
-                    )}
+                    <div className="avatar-fallback">{getInitials(name || user?.email || 'U')}</div>
                 </div>
                 <div className="profile-info">
-                    <h1 className="profile-name">{userData?.name || user?.email}</h1>
+                    <h1 className="profile-name">{name}</h1>
                     <p className="profile-email">{user?.email}</p>
                     <p className="profile-bio">
                         {bio}

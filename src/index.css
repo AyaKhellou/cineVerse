@@ -643,6 +643,113 @@ header nav a.active-link {
   color: red;
 }
 
+/* Auth (login / signup) */
+.auth-page{
+  min-height: calc(100vh - 6rem);
+  display: grid;
+  place-items: center;
+  padding: 2.5rem 1rem;
+}
+.auth-card{
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.88));
+  box-shadow: 0 30px 70px rgba(0,0,0,0.12);
+}
+.auth-visual{
+  background: linear-gradient(135deg, rgba(192,205,136,0.12), rgba(221,127,128,0.08));
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-visual h1{
+  font-size: 1.6rem;
+  color: #3d2f1b;
+  max-width: 20ch;
+}
+.auth-content{
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.auth-header h2{
+  margin: 0 0 0.25rem 0;
+  font-size: 1.6rem;
+  color: #382e1f;
+}
+.auth-header p{
+  margin: 0;
+  color: var(--muted);
+}
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.6rem;
+}
+.auth-label{
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-weight: 600;
+  color: #3f3423;
+}
+.auth-input{
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(115,95,72,0.12);
+  background: rgba(255,255,255,0.9);
+  outline: none;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.auth-input:focus{
+  box-shadow: 0 6px 20px rgba(136,145,73,0.08);
+  transform: translateY(-1px);
+}
+.auth-actions{
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+.auth-button{
+  padding: 0.85rem 1.05rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-button.primary{
+  background: linear-gradient(135deg,#dd7f80,#e89e87);
+  color: white;
+  box-shadow: 0 10px 28px rgba(221,127,128,0.18);
+}
+.auth-button.ghost{
+  background: transparent;
+  border: 1px solid rgba(115,95,72,0.12);
+  color: var(--text);
+}
+.auth-help{
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 940px){
+  .auth-card{grid-template-columns: 1fr}
+  .auth-visual{display:none}
+}
+
 /* Profile page styles */
 .profile-page{
   max-width: 920px;

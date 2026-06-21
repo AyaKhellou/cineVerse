@@ -1,8 +1,8 @@
 import { auth } from '../firebase-config'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { use, useState } from 'react'
-import { useNavigate } from "react-router-dom";
-import { doc,collection, addDoc, setDoc} from "firebase/firestore";
+import { useState } from 'react'
+import { useNavigate, Link } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from '../firebase-config'
 
 
@@ -46,44 +46,61 @@ export default function SignUp(){
         }
     }
 
-	return (
-		<main className="login-page">
-			<form className="login-form">
-                <label>
-					Name
-					<input 
-                    type="text" 
-                    placeholder="name..."
-                    value={name} 
-                    onChange={(e) => setName(e.target.value)}
-                    />
-				</label>
+    return (
+        <main className="auth-page">
+            <div className="auth-card">
+                <div className="auth-visual">
+                    <h1>Join MovieApp</h1>
+                </div>
+                <div className="auth-content">
+                    <header className="auth-header">
+                        <h2>Create your account</h2>
+                        <p>Sign up to save favorites and personalize recommendations</p>
+                    </header>
+                    <form className="auth-form" onSubmit={(e)=>{e.preventDefault(); signUp();}}>
+                        <label className="auth-label">
+                            <span>Name</span>
+                            <input 
+                                className="auth-input"
+                                type="text" 
+                                placeholder="Your name"
+                                value={name} 
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </label>
 
-				<label>
-					Email
-					<input 
-                    type="email" 
-                    placeholder="Email..."
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                    />
-				</label>
+                        <label className="auth-label">
+                            <span>Email</span>
+                            <input 
+                                className="auth-input"
+                                type="email" 
+                                placeholder="you@example.com"
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
 
-				<label>
-					Password
-					<input 
-                    type="password" 
-                    placeholder="Password..." 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)}
-                    />
-				</label>
-                {err&&
-                <p className='error-message'>{err}</p>
-                }
-
-				<button type='button' onClick={signUp}>Sign Up</button>
-			</form>
-		</main>
-	)
+                        <label className="auth-label">
+                            <span>Password</span>
+                            <input 
+                                className="auth-input"
+                                type="password" 
+                                placeholder="Create a password" 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                        {err&&
+                        <p className='error-message'>{err}</p>
+                        }
+                        <div className="auth-actions">
+                            <button className="auth-button primary" type='submit'>Sign Up</button>
+                            <Link to="/login" className="auth-button ghost">Already have an account?</Link>
+                        </div>
+                    </form>
+                    <p className="auth-help">Password must be at least 6 characters.</p>
+                </div>
+            </div>
+        </main>
+    )
 }

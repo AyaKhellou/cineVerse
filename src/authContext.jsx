@@ -8,6 +8,8 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [loadingAuth, setLoadingAuth] = useState(true);
+    const [loadingData, setLoadingData] = useState(false);
 
     useEffect(()=>{
         async function getuserdata(){
@@ -15,11 +17,15 @@ export function AuthProvider({ children }) {
                 setUserData(null)
                 return;
             }
+            setLoadingData(true)
+
             const myData = await getDoc(doc(db, "users",user.uid));
             
             if(myData.exists()){
                 setUserData(myData.data());
             }
+            
+            setLoadingData(false)
         }
         getuserdata()
     },[user])
@@ -29,12 +35,13 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
+        setLoadingAuth(false)
         });
         return unsubscribe;
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, userData, setUserData }}>
+        <AuthContext.Provider value={{ user, userData, setUserData, loadingData, loadingAuth }}>
             {children}
         </AuthContext.Provider>
     );

@@ -32,8 +32,6 @@ export default function MoviePage(){
 
     const isFavorite = userData?.favorites?.some(favId => favId === movie?.id);
 
-    
-// fix this:-----------------------
     async function toggleFavorite(){
         if(user){
         if(isFavorite){
@@ -63,8 +61,6 @@ export default function MoviePage(){
         }
         
     }
-            console.log(userData.favorites);
-
 
     const location = useLocation();
     const from = location.state?.from || '/';
