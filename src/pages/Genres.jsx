@@ -1,10 +1,13 @@
-import { NavLink, useOutletContext, useSearchParams } from 'react-router-dom'
+import { NavLink, useSearchParams } from 'react-router-dom'
 import MovieCard from '../components/MovieCard'
 import { useState, useEffect } from 'react'
+import { getMoviesByGenres } from '../services/tmbd'
+import useGenres from '../hooks/useGenres'
+import useMovies from '../hooks/useMovies'
 
 export default function Genres(){
-    const { allMovies, genres, API_KEY } = useOutletContext();
-
+    const genres = useGenres();
+    const allMovies = useMovies();
     const [searchParams, setSearchParams] = useSearchParams();
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [activeFilters, setActiveFilters] = useState(searchParams.get('id')?searchParams.get('id').split(',').filter(id=> id!=='').map(id=> Number(id)):[])
@@ -19,20 +22,16 @@ export default function Genres(){
     }
 
     useEffect(()=>{
-
         setSearchParams({id: activeFilters.join(',')})
-
     }, [activeFilters])
 
     const filterId = searchParams.get('id');
 
         useEffect(()=>{
-            fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&api_key=${API_KEY}&with_genres=${filterId}`)
-            .then(res=> res.json())
-            .then(data=> setFilteredMovies(data.results))
-            .catch(err => console.error(err))
-        },[filterId,API_KEY])
-    
+            getMoviesByGenres(filterId)
+            .then(setFilteredMovies)
+            .catch(console.error)
+        },[filterId])
 
     function clearFilter(){
         setActiveFilters([])

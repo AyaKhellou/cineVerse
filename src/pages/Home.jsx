@@ -1,8 +1,11 @@
-import { useOutletContext, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
+import useTrendingMovies from '../hooks/useTrendingMovies'
+import useGenres from "../hooks/useGenres";
 
 export default function Home(){
-    const {trendingMovies, genres} = useOutletContext();
+    const trendingMovies = useTrendingMovies();
+    const genres = useGenres();
 
     return(
         <>

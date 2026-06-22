@@ -1,12 +1,14 @@
-import { useSearchParams, useOutletContext } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import React from "react";
 import MovieCard from "../components/MovieCard";
+import { searchMovies } from '../services/tmbd'
+import useGenres from "../hooks/useGenres";
 
 export default function SearchPage(){
     const [searchParams] = useSearchParams();
-    const { API_KEY, genres } = useOutletContext();
     const [searchResults, setSearchResults] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+    const genres = useGenres();
     
     const query = searchParams.get('query');
 
@@ -18,12 +20,11 @@ export default function SearchPage(){
         }
 
         setLoading(true);
-        fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`)
-            .then(res=> res.json())
-            .then(data=> setSearchResults(data.results))
+        searchMovies(query)
+            .then(setSearchResults)
             .catch(() => setSearchResults([]))
             .finally(() => setLoading(false))
-    },[query, API_KEY])
+    },[query])
 
     function findGenre(movie){
         const genre = movie.genre_ids ?

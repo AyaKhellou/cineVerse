@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { User } from 'lucide-react'
 import SearchBar from '../components/SearchBar'
-import { useAuth } from "../authContext";
+import { useAuth } from "../context/authContext";
 
 
 export default function Header(){

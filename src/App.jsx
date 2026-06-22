@@ -1,21 +1,19 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Routes, Route} from 'react-router-dom'
-import Layout from './layout/Layout'
-import Home from './layout/Home'
-import Genres from './layout/Genres'
-import Favorites from './layout/Favorites'
-import MoviePage from './layout/MoviePage'
-import SearchPage from './layout/SearchPage'
-import NotFound from './layout/NotFound'
-import Profile from './layout/Profile'
-import SignUp from './layout/SignUp'
-import LogIn from './layout/LogIn'
-import Authrequired from './layout/Authrequired'
-
+import Layout from './pages/Layout'
+import Home from './pages/Home'
+import Genres from './pages/Genres'
+import Favorites from './pages/Favorites'
+import MoviePage from './pages/MoviePage'
+import SearchPage from './pages/SearchPage'
+import NotFound from './pages/NotFound'
+import Profile from './pages/Profile'
+import SignUp from './pages/SignUp'
+import LogIn from './pages/LogIn'
+import Authrequired from './pages/Authrequired'
 
 
 export default function App() {
-
   return (
     <BrowserRouter>
       <Routes>

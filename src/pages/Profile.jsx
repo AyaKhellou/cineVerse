@@ -2,7 +2,7 @@ import { auth, db } from '../firebase-config'
 import { signOut } from 'firebase/auth'
 import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../authContext";
+import { useAuth } from "../context/authContext";
 import { useState, useEffect } from 'react';
 
 

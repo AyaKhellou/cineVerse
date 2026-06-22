@@ -1,54 +1,38 @@
-import React from "react";
 import { useParams, useOutletContext, Link, useLocation, useNavigate } from "react-router-dom";
 import { Heart } from 'lucide-react';
 import { updateDoc, arrayUnion, doc, arrayRemove } from "firebase/firestore";
 import { db } from '../firebase-config'
-import { useAuth } from '../authContext'
+import { useAuth } from '../context/authContext'
+import { addFavorite, removeFavorite } from '../services/firestore'
+import useMovie from "../hooks/useMovie";
+import useMovies from "../hooks/useMovies";
+import useGenres from "../hooks/useGenres";
 
 
 export default function MoviePage(){
 
     const { id } = useParams();
     const movieId = Number(id);
-    const { allMovies, genres, API_KEY } = useOutletContext();
-    const [movie, setMovie] = React.useState(null);
-    const [loading , setLoading] = React.useState(false)
-    const [err , setErr] = React.useState(null)
     const { user, userData, setUserData } = useAuth()
     const navigate = useNavigate();
+    const { movie, loading, err } = useMovie(movieId);
+    const allMovies = useMovies();
+    const genres = useGenres();
 
-
-    React.useEffect(() => {
-        setLoading(true)
-
-        fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                setMovie(data);
-            })
-            .catch((err)=> setErr(err))
-            .finally(()=> setLoading(false))
-    },[id, API_KEY])
 
     const isFavorite = userData?.favorites?.some(favId => favId === movie?.id);
 
     async function toggleFavorite(){
         if(user){
         if(isFavorite){
-            await updateDoc(doc(db, "users", user.uid),{
-                    favorites: arrayRemove(movie.id)
-                }
-            );
+            removeFavorite(user.uid , movie.id)
             setUserData(prev => ({
         ...prev,
         favorites: prev.favorites.filter(id => id !== movie.id)
     }));
         }
         if(!isFavorite){
-            await updateDoc(doc(db, "users", user.uid),{
-                    favorites: arrayUnion(movie.id)
-                }
-            );
+            addFavorite(user.uid , movie.id)
             setUserData(prev => ({
         ...prev,
         favorites: [...(prev.favorites || []), movie.id]

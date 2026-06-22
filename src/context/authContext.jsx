@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth,db } from "./firebase-config";
+import { auth,db } from "../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection , getDoc, doc } from "firebase/firestore"; 
+import { getUserData } from "../services/firestore.js";
 
 const AuthContext = createContext();
 
@@ -19,11 +20,9 @@ export function AuthProvider({ children }) {
             }
             setLoadingData(true)
 
-            const myData = await getDoc(doc(db, "users",user.uid));
+            const data = await getUserData(user.uid)
             
-            if(myData.exists()){
-                setUserData(myData.data());
-            }
+            setUserData(data)
             
             setLoadingData(false)
         }
