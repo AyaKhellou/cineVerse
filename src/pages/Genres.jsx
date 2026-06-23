@@ -1,13 +1,15 @@
 import { NavLink, useSearchParams } from 'react-router-dom'
 import MovieCard from '../components/MovieCard'
+import Loading from '../components/Loading'
+import Error from '../components/Error'
 import { useState, useEffect } from 'react'
 import { getMoviesByGenres } from '../services/tmbd'
 import useGenres from '../hooks/useGenres'
 import useMovies from '../hooks/useMovies'
 
 export default function Genres(){
-    const genres = useGenres();
-    const allMovies = useMovies();
+    const { genres, loading: loadingGenres, err: errorGenres } = useGenres();
+    const { allMovies, loadingMovies, errorLoadingMovies } = useMovies();
     const [searchParams, setSearchParams] = useSearchParams();
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [activeFilters, setActiveFilters] = useState(searchParams.get('id')?searchParams.get('id').split(',').filter(id=> id!=='').map(id=> Number(id)):[])
@@ -41,10 +43,30 @@ export default function Genres(){
     })
     }
     
+    // show loading if either genres or movies are still loading
+    if (loadingGenres || loadingMovies) return (
+        <div className="genres-page">
+            <h1>Genres</h1>
+            <Loading />
+        </div>
+    )
+
+    // show error if either request failed
+    if (errorGenres || errorLoadingMovies) return (
+        <div className="genres-page">
+            <h1>Genres</h1>
+            <Error err={errorGenres || errorLoadingMovies} />
+        </div>
+    )
+
     return(
         <div className="genres-page">
-            <h1>my genres</h1>
-            <div className="genres-container">
+            <div className="genres-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem'}}>
+                <h1>Genres</h1>
+                <p className="page-subtitle">Browse by genre — showing {filterId ? filteredMovies.length : allMovies.length} movies</p>
+            </div>
+
+            <div className="genres-container controls">
                 {genres.map(genre => (
                     <button
                         key={genre.id}
@@ -57,22 +79,29 @@ export default function Genres(){
                 ))}
                 <button type="button" className="genre-clear-button" onClick={clearFilter}>Clear filters</button>
             </div>
+
             <div className="movies-container">
-                {filterId ? filteredMovies.map(movie => (
-                    <MovieCard 
-                    key={movie.id} 
-                    movie={movie} 
-                    genre={genres.find(genre => genre.id === movie.genre_ids[0])}
-                    />
-                )) : 
+                {filterId ? (
+                    filteredMovies.length === 0 ? (
+                        <div className="genres-empty">No movies match these filters.</div>
+                    ) : (
+                        filteredMovies.map(movie => (
+                            <MovieCard 
+                                key={movie.id} 
+                                movie={movie} 
+                                genre={genres.find(genre => genre.id === movie.genre_ids[0])}
+                            />
+                        ))
+                    )
+                ) : (
                     allMovies.map(movie => (
                         <MovieCard 
-                        key={movie.id}
-                        movie={movie} 
-                        genre={genres.find(genre => genre.id === movie.genre_ids[0])}
+                            key={movie.id}
+                            movie={movie} 
+                            genre={genres.find(genre => genre.id === movie.genre_ids[0])}
                         />
                     ))
-                }
+                )}
             </div>
         </div>
     )}

@@ -7,6 +7,8 @@ import { addFavorite, removeFavorite } from '../services/firestore'
 import useMovie from "../hooks/useMovie";
 import useMovies from "../hooks/useMovies";
 import useGenres from "../hooks/useGenres";
+import { getPosterUrl } from '../services/tmbd'
+
 
 
 export default function MoviePage(){
@@ -16,8 +18,8 @@ export default function MoviePage(){
     const { user, userData, setUserData } = useAuth()
     const navigate = useNavigate();
     const { movie, loading, err } = useMovie(movieId);
-    const allMovies = useMovies();
-    const genres = useGenres();
+    const {allMovies} = useMovies();
+    const { genres } = useGenres();
 
 
     const isFavorite = userData?.favorites?.some(favId => favId === movie?.id);
@@ -99,7 +101,7 @@ export default function MoviePage(){
             <h1 className="movie-title">{movie.title}</h1>
             <div className="movie-grid">
                 <div className="movie-poster">
-                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                    <img src={getPosterUrl(movie.poster_path)} alt={movie.title} />
                 </div>
 
                 <section className="movie-details">

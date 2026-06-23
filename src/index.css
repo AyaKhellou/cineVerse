@@ -643,6 +643,110 @@ header nav a.active-link {
   color: red;
 }
 
+/* Favorites page styles */
+.favorites-page{
+  max-width: 1160px;
+  margin: 1.5rem auto;
+  padding: 1.6rem;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+.favorites-page h1{
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-bottom: 0.35rem;
+  color: #382e1f;
+}
+.favorites-page .page-subtitle{
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.favorites-page .movies-container{
+  margin-top: 0.8rem;
+}
+.favorites-page .empty-state{
+  padding: 1.6rem;
+  text-align: center;
+  color: var(--muted);
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
+  border-radius: 12px;
+  border: 1px solid rgba(115,95,72,0.06);
+}
+.favorites-page .error{
+  color: var(--danger);
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.favorites-page .error-msg{
+  color: #6d5d4a;
+  margin-bottom: 1rem;
+}
+.favorites-page button{
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #2f341f;
+  font-weight: 700;
+  transition: transform var(--transition), filter var(--transition);
+}
+.favorites-page button:hover{
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+}
+
+/* Genres specific tweaks */
+.genres-page{
+  max-width: 1160px;
+  margin: 1.5rem auto;
+  padding: 1.6rem;
+  background: var(--surface-strong);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+.genres-header h1{
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: #382e1f;
+}
+.genres-header .page-subtitle{
+  color: var(--muted);
+  font-weight: 600;
+}
+.genres-container.controls{
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.genres-empty{
+  padding: 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6));
+  color: var(--muted);
+  text-align: center;
+}
+
+/* small UI helpers for empty and error states */
+.empty-state{
+  padding: 1.4rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(115,95,72,0.06);
+  color: var(--muted);
+  text-align: center;
+  margin: 1rem 0;
+}
+.error{
+  color: var(--danger);
+}
+.error-msg{
+  color: #6d5d4a;
+}
+
 /* Auth (login / signup) */
 .auth-page{
   min-height: calc(100vh - 6rem);

@@ -3,12 +3,15 @@ import { getGenres } from '../services/tmbd'
 
 export default function useGenres(){
     const [genres, setGenres] = useState([]);
+    const [loading , setLoading] = useState(true);
+    const [err , setErr] = useState(null)
 
     useEffect(()=>{
         getGenres()
         .then(setGenres)
-        .catch(console.error)
+        .catch(setErr)
+        .finally(()=>setLoading(false))
     },[])
     
-    return genres;
+    return { genres, loading, err };
 }

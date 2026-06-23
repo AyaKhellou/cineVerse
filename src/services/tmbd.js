@@ -58,3 +58,7 @@ export async function getMoviesByGenres(genreIds) {
 
     return data.results;
 }
+
+export function getPosterUrl(path) {
+    return `https://image.tmdb.org/t/p/w500${path}`;
+}

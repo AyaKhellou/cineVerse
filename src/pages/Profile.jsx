@@ -13,6 +13,7 @@ function getInitials(name = ''){
 export default function Profile(){
     const navigate = useNavigate();
     const { user, userData, setUserData } = useAuth();
+    const { loadingData, loadingAuth } = useAuth();
     const [editMode, setEditMode] = useState(false);
     const [bio, setBio] = useState(userData?.bio || 'add bio.');
     const [name, setName] = useState(userData?.name || user.email);
@@ -68,6 +69,14 @@ export default function Profile(){
         </main>
         )
     }
+
+    if(loadingAuth || loadingData) return (
+        <main className="profile-page">
+            <div className="movie-not-found">
+                <h2>Loading profile…</h2>
+            </div>
+        </main>
+    )
 
     return (
         <main className="profile-page">

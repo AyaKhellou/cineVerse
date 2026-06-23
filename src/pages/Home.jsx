@@ -2,19 +2,22 @@ import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import useTrendingMovies from '../hooks/useTrendingMovies'
 import useGenres from "../hooks/useGenres";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 export default function Home(){
-    const trendingMovies = useTrendingMovies();
-    const genres = useGenres();
-
+    const { trendingMovies, loading, err } = useTrendingMovies();
+    const {genres} = useGenres();
     return(
         <>
             <section className="trending">
                 <div className="trending-copy">
                     <span>trending</span>
-                    {!trendingMovies || trendingMovies.length === 0 ? (
-                        <p>Loading...</p>
-                    ) : (
+                    {loading ? (
+                        <Loading />
+                    ) : err ? (
+                        <Error err={err} />
+                    ) : trendingMovies && trendingMovies.length > 0 ? (
                         <>
                             <h2>{trendingMovies[0].title}</h2>
                             <p>{trendingMovies[0].overview}</p>
@@ -22,6 +25,8 @@ export default function Home(){
                                 More Info
                             </Link>
                         </>
+                    ) : (
+                        <div className="empty-state"><h3>No trending movies available</h3></div>
                     )}
                 </div>
                 <div className="trending-image">
@@ -33,7 +38,7 @@ export default function Home(){
             <section className="trending-list">
                 <h3>Trending movies</h3>
                 <div className="movies-container">
-                {trendingMovies.slice(0,6).map((movie) => (
+                {(trendingMovies || []).slice(0,trendingMovies.length).map((movie) => (
                     <MovieCard 
                     key={movie.id} 
                     movie={movie} 

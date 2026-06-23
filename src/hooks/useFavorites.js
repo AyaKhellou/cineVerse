@@ -5,7 +5,8 @@ import { getMovie } from '../services/tmbd'
 export default function useFavorites(){
     const { userData } = useAuth()
     const [favMoviesList, setFavMoviesList] = useState([])
-    const API_KEY = import.meta.env.VITE_API_KEY;
+    const [loading , setLoading] = useState(true);
+    const [err , setErr] = useState(null)
 
 
     useEffect(() => {
@@ -17,8 +18,9 @@ export default function useFavorites(){
         .then(movies => {
             setFavMoviesList(movies);
         })
-        .catch(console.error);
-    }, [userData?.favorites, API_KEY]);
+        .catch(setErr)
+        .finally(()=>setLoading(false))
+    }, [userData?.favorites]);
 
-    return favMoviesList;
+    return { favMoviesList, err, loading };
 }
