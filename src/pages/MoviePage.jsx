@@ -8,6 +8,8 @@ import useMovie from "../hooks/useMovie";
 import useMovies from "../hooks/useMovies";
 import useGenres from "../hooks/useGenres";
 import { getPosterUrl } from '../services/tmbd'
+import { useRef } from 'react'
+import MovieCard from '../components/MovieCard'
 
 
 
@@ -20,6 +22,8 @@ export default function MoviePage(){
     const { movie, loading, err } = useMovie(movieId);
     const {allMovies} = useMovies();
     const { genres } = useGenres();
+    const castRef = useRef(null);
+
 
 
     const isFavorite = userData?.favorites?.some(favId => favId === movie?.id);
@@ -91,6 +95,7 @@ export default function MoviePage(){
         .join(", ");
 
     return(
+        <>
         <main className="movie-page">
             <img 
             className="movie-backdrop"
@@ -123,6 +128,65 @@ export default function MoviePage(){
                     <Link to={from+search} className="back-link">Go Back</Link>
                 </section>
             </div>
+
+            {/* Cast */}
+            {movie.credits?.cast && movie.credits.cast.length > 0 && (
+                <section className="cast-section">
+                    <h2>Cast</h2>
+                    <button
+                        className="cast-nav left"
+                        onClick={() => castRef.current?.scrollBy({ left: -240, behavior: 'smooth' })}
+                        aria-label="Scroll cast left"
+                    >
+                        ‹
+                    </button>
+
+                    <div className="cast-list" ref={castRef}>
+                        {movie.credits.cast.slice(0, 12).map((person) => (
+                            <div className="cast-item" key={person.cast_id || person.credit_id}>
+                                {person.profile_path ? (
+                                    <img src={`https://image.tmdb.org/t/p/w185${person.profile_path}`} alt={person.name} />
+                                ) : (
+                                    <div className="cast-fallback">{person.name?.split(' ').map(n => n[0]).join('').slice(0, 2)}</div>
+                                )}
+                                <div className="cast-name">{person.name}</div>
+                                <div className="cast-character">{person.character}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <button
+                        className="cast-nav right"
+                        onClick={() => castRef.current?.scrollBy({ left: 240, behavior: 'smooth' })}
+                        aria-label="Scroll cast right"
+                    >
+                        ›
+                    </button>
+                </section>
+            )}
         </main>
+            {/* Similar movies */}
+            {movie.similar?.results && movie.similar.results.length > 0 && (
+                <section className="similar-section">
+                    <h2>Similar movies</h2>
+                    <div className="movies-container similar-movies">
+                        {movie.similar.results.slice(0, 4).map(sim => (
+                            <MovieCard key={sim.id} movie={sim} genre={genres.find(g => g.id === (sim.genre_ids ? sim.genre_ids[0] : sim.genres?.[0]?.id))} />
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {movie.recommendations?.results && movie.recommendations.results.length > 0 && (
+                <section className="similar-section">
+                    <h2>Recomended movies</h2>
+                    <div className="movies-container similar-movies">
+                        {movie.recommendations.results.slice(0, 6).map(rec => (
+                            <MovieCard key={rec.id} movie={rec} genre={genres.find(g => g.id === (rec.genre_ids ? rec.genre_ids[0] : rec.genres?.[0]?.id))} />
+                        ))}
+                    </div>
+                </section>
+            )}
+        </>
     )
 }

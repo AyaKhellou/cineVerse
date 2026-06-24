@@ -1,0 +1,61 @@
+/* reusable layout and utility helpers */
+main,
+.trending,
+.genres-page,
+.search-page,
+.not-found {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.empty-state{
+  padding: 1.4rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(115,95,72,0.06);
+  color: var(--muted);
+  text-align: center;
+  margin: 1rem 0;
+}
+.error{
+  color: var(--danger);
+}
+.error-msg{
+  color: #6d5d4a;
+}
+.error-message{
+  color: red;
+}
+
+.btn,
+.auth-button {
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary,
+.auth-button.primary {
+  background: linear-gradient(135deg,#dd7f80,#e89e87);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(221,127,128,0.18);
+}
+
+.btn-primary:hover,
+.auth-button.primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-ghost,
+.auth-button.ghost {
+  background: transparent;
+  border: 1px solid rgba(115,95,72,0.12);
+  color: var(--text);
+}

@@ -1,0 +1,12 @@
+@import "./variables.css";
+@import "./globals.css";
+@import "./utilities.css";
+@import "./header.css";
+@import "./movie-card.css";
+@import "./movie-page.css";
+@import "./auth.css";
+@import "./profile.css";
+@import "./home.css";
+@import "./genres.css";
+@import "./favorites.css";
+@import "./search.css";

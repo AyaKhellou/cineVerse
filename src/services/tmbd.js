@@ -31,9 +31,11 @@ export async function getMovies() {
     return data.results;
 }
 
+// https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits,videos,recommendations,similar
+
 export async function getMovie(id) {
     const response = await fetch(
-        `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
+        `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits,videos,recommendations,similar`
     );
 
     return response.json();

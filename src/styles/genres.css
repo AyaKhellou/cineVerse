@@ -1,0 +1,93 @@
+
+.genres-page h1 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: 1.2rem;
+  color: #3f3423;
+}
+
+.genres-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1.8rem;
+}
+
+.genre-item {
+  background: rgba(255,255,255,0.8);
+  padding: 0.95rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition), color var(--transition);
+  user-select: none;
+}
+
+.genre-item:hover {
+  transform: translateY(-2px);
+  background: rgba(192,205,136,0.24);
+}
+
+.genre-item.active {
+  background: var(--accent);
+  color: white;
+}
+
+.genre-clear-button {
+  background: transparent;
+  border: 1px solid rgba(115, 95, 72, 0.18);
+  color: var(--muted);
+  padding: 0.95rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.genre-clear-button:hover {
+  background: rgba(192,205,136,0.14);
+  border-color: rgba(192,205,136,0.3);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.genres-page .movies-container {
+  margin-top: 0.5rem;
+}
+
+
+/* Genres specific tweaks */
+.genres-page{
+  max-width: 1160px;
+  margin: var(--space-lg) auto;
+  padding: 1.6rem;
+  background: var(--surface-strong);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 680px) {
+  .genres-container {
+    justify-content: center;
+  }
+}
+.genres-header h1{
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: #382e1f;
+}
+.genres-header .page-subtitle{
+  color: var(--muted);
+  font-weight: 600;
+}
+.genres-container.controls{
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.genres-empty{
+  padding: 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6));
+  color: var(--muted);
+  text-align: center;
+}

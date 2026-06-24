@@ -1,0 +1,32 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.95), transparent 22%), linear-gradient(180deg, #fbf5ee 0%, #f3e4d1 55%, #d8b68a 100%);
+  color: var(--text);
+  padding: var(--space-xl);
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 0.8rem;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 18% 10%, rgba(255,255,255,0.45) 0%, transparent 20%), radial-gradient(circle at 85% 25%, rgba(192,205,136,0.16) 0%, transparent 18%);
+  pointer-events: none;
+  z-index: -1;
+}

@@ -6,7 +6,7 @@ export default function useMovie(id){
 
     const [movie, setMovie] = useState(null);
     const [loading , setLoading] = useState(false);
-    const [err , setErr] = useState(null)
+    const [err , setErr] = useState(null)    
 
     useEffect(() => {
         setLoading(true)
