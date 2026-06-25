@@ -1,6 +1,7 @@
 
 /* home */
 /* trending */
+/* Layout */
 .trending {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) minmax(320px, 460px);
@@ -35,7 +36,7 @@
   font-size: 0.85rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6a5f46;
+  color: var(--muted);
   background: rgba(192,205,136,0.18);
   padding: 0.45rem 0.85rem;
   border-radius: 999px;
@@ -47,7 +48,7 @@
   line-height: 1.05;
   margin-bottom: 1.15rem;
   max-width: 12ch;
-  color: #382e1f;
+  color: var(--text);
 }
 
 .trending p {
@@ -65,7 +66,7 @@
   min-width: 170px;
   padding: 1rem 1.6rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #dd7f80, #e89e87);
+  background: linear-gradient(135deg, var(--danger), var(--accent-bright));
   color: white;
   text-decoration: none;
   font-weight: 700;

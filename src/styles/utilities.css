@@ -1,61 +1,170 @@
-/* reusable layout and utility helpers */
-main,
-.trending,
-.genres-page,
-.search-page,
-.not-found {
+/* Layout */
+.page-container,
+.content-card,
+.section-card {
   max-width: 1160px;
   margin: 0 auto;
 }
 
-.empty-state{
-  padding: 1.4rem;
+/* Surfaces */
+.surface {
+  background: var(--surface);
+  border-radius: 20px;
+}
+
+.surface-strong {
+  background: var(--surface-strong);
+}
+
+.surface-soft {
+  background: var(--surface-soft);
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-soft {
+  background: var(--surface-soft);
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(10px);
+}
+
+/* Typography */
+.page-title,
+.section-title,
+.card-title {
+  color: var(--text);
+  line-height: 1.1;
+  margin: 0 0 var(--space-md);
+  font-weight: 700;
+}
+
+.page-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.card-title {
+  font-size: 1.3rem;
+}
+
+.page-subtitle,
+.body-text,
+.muted-text {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.page-subtitle {
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.body-text {
+  font-size: 1rem;
+}
+
+.muted-text {
+  color: var(--muted);
+}
+
+/* Buttons */
+.btn,
+.button,
+.auth-button,
+.trending-cta,
+.genre-clear-button,
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), filter var(--transition);
+}
+
+.btn-primary,
+.button-primary,
+.button--primary,
+.auth-button.primary,
+.trending-cta {
+  background: linear-gradient(135deg, var(--danger), var(--accent-bright));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(221,127,128,0.18);
+}
+
+.btn-ghost,
+.button-ghost,
+.button--ghost,
+.auth-button.ghost {
+  background: transparent;
+  border: 1px solid rgba(115,95,72,0.12);
+  color: var(--text);
+}
+
+.btn:hover,
+.button:hover,
+.auth-button:hover,
+.trending-cta:hover,
+.genre-clear-button:hover,
+.back-link:hover,
+.favorites-page button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* Utility helpers */
+.spacing-xs { margin: var(--space-xs); }
+.spacing-sm { margin: var(--space-sm); }
+.spacing-md { margin: var(--space-md); }
+.spacing-lg { margin: var(--space-lg); }
+.spacing-xl { margin: var(--space-xl); }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+.text-center { text-align: center; }
+.text-muted { color: var(--muted); }
+
+.empty-state {
+  padding: var(--space-md);
   border-radius: 12px;
   background: rgba(255,255,255,0.6);
   border: 1px solid rgba(115,95,72,0.06);
   color: var(--muted);
   text-align: center;
-  margin: 1rem 0;
+  margin: var(--space-md) 0;
 }
-.error{
+
+.error {
   color: var(--danger);
 }
-.error-msg{
-  color: #6d5d4a;
-}
-.error-message{
-  color: red;
+
+.error-msg {
+  color: var(--muted);
 }
 
-.btn,
-.auth-button {
-  padding: 0.7rem 1rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.error-message {
+  color: var(--danger);
 }
 
-.btn-primary,
-.auth-button.primary {
-  background: linear-gradient(135deg,#dd7f80,#e89e87);
-  color: #fff;
-  box-shadow: 0 12px 30px rgba(221,127,128,0.18);
-}
-
-.btn-primary:hover,
-.auth-button.primary:hover {
-  transform: translateY(-2px);
-}
-
-.btn-ghost,
-.auth-button.ghost {
-  background: transparent;
-  border: 1px solid rgba(115,95,72,0.12);
-  color: var(--text);
+/* Responsive page spacing helpers */
+@media (max-width: 560px) {
+  .responsive-padding { padding: 0.8rem; }
 }

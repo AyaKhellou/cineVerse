@@ -2,11 +2,13 @@
     color-scheme: light;
     --bg: #f7f0e6;
     --surface: rgba(255,255,255,0.92);
+    --surface-soft: rgba(255,255,255,0.8);
     --surface-strong: rgba(255,255,255,0.99);
+    --accent: #c0cd88;
+    --accent-bright: #e89e87;
+    --accent-dark: #889149;
     --text: #3f3423;
     --muted: #6d5d48;
-    --accent: #c0cd88;
-    --accent-dark: #889149;
     --danger: #dd7f80;
     --shadow: 0 28px 70px rgba(0,0,0,0.11);
     --radius: 28px;

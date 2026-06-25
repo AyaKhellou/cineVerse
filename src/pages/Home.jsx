@@ -26,7 +26,7 @@ export default function Home(){
                             </Link>
                         </>
                     ) : (
-                        <div className="empty-state"><h3>No trending movies available</h3></div>
+                        <div className="empty-state"><h3 className="section-title">No trending movies available</h3></div>
                     )}
                 </div>
                 <div className="trending-image">
@@ -36,7 +36,7 @@ export default function Home(){
                 </div>
             </section>
             <section className="trending-list">
-                <h3>Trending movies</h3>
+                <h3 className="section-title">Trending movies</h3>
                 <div className="movies-container">
                 {(trendingMovies || []).slice(0,trendingMovies.length).map((movie) => (
                     <MovieCard 

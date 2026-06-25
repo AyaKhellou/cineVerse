@@ -42,9 +42,9 @@ export default function SearchPage(){
     }
 
     return(
-        <main className="search-page">
+        <main className="search-page page-container">
             <header className="page-header">
-                <h1>{query ? `Search results for “${query}”` : 'Search for a movie'}</h1>
+                <h1 className="page-title">{query ? `Search results for “${query}”` : 'Search for a movie'}</h1>
                 <p className="page-subtitle">Find movie posters, ratings, and details from TMDB.</p>
             </header>
 

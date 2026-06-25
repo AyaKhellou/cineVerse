@@ -44,20 +44,20 @@ export default function Profile(){
 
     if(editMode){
         return(
-            <main className="profile-page">
+            <main className="profile-page page-container">
             <section className="profile-card">
                 <div className="profile-avatar">
                     <div className="avatar-fallback">{getInitials(name || user?.email || 'U')}</div>
                 </div>
                 <div className="profile-info">
                     <input 
-                    className='profile-name' 
+                    className="auth-input profile-name" 
                     type="text" name="name" 
                     value={name} onChange={(e)=>setName(e.target.value)} />
 
                     <p className="profile-email">{user?.email}</p>
                     <input 
-                    className='profile-bio' 
+                    className="auth-input profile-bio" 
                     type="text" name="bio" 
                     value={bio} onChange={(e)=>setBio(e.target.value)} />
                     <div className="profile-actions">
@@ -71,7 +71,7 @@ export default function Profile(){
     }
 
     if(loadingAuth || loadingData) return (
-        <main className="profile-page">
+        <main className="profile-page page-container">
             <div className="movie-not-found">
                 <h2>Loading profile…</h2>
             </div>
@@ -79,7 +79,7 @@ export default function Profile(){
     )
 
     return (
-        <main className="profile-page">
+        <main className="profile-page page-container">
             <section className="profile-card">
                 <div className="profile-avatar">
                     <div className="avatar-fallback">{getInitials(name || user?.email || 'U')}</div>

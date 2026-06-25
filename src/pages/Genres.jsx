@@ -60,9 +60,9 @@ export default function Genres(){
     )
 
     return(
-        <div className="genres-page">
-            <div className="genres-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem'}}>
-                <h1>Genres</h1>
+        <div className="genres-page page-container">
+            <div className="genres-header page-header">
+                <h1 className="page-title">Genres</h1>
                 <p className="page-subtitle">Browse by genre — showing {filterId ? filteredMovies.length : allMovies.length} movies</p>
             </div>
 

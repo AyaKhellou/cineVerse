@@ -168,7 +168,7 @@ export default function MoviePage(){
             {/* Similar movies */}
             {movie.similar?.results && movie.similar.results.length > 0 && (
                 <section className="similar-section">
-                    <h2>Similar movies</h2>
+                    <h2 className="section-title">Similar movies</h2>
                     <div className="movies-container similar-movies">
                         {movie.similar.results.slice(0, 4).map(sim => (
                             <MovieCard key={sim.id} movie={sim} genre={genres.find(g => g.id === (sim.genre_ids ? sim.genre_ids[0] : sim.genres?.[0]?.id))} />

@@ -23,7 +23,7 @@ export default function Favorites(){
 
     return(
         <div className="favorites-page">
-            <h1>My Favorite Movies</h1>
+            <h1 className="page-title">My Favorite Movies</h1>
             <p className="page-subtitle">You have {favMoviesList.length} favorite{favMoviesList.length === 1 ? '' : 's'} saved.</p>
             {favMoviesList.length === 0 ? (
                 <p>No favorites yet. Add some movies to your favorites.</p>

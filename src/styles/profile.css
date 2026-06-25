@@ -1,12 +1,12 @@
-
-/* Profile page styles */
-.profile-page{
+/* Layout */
+.profile-page {
   max-width: 920px;
-  margin: 2.25rem auto;
-  padding: 1.25rem;
+  margin: var(--space-2xl) auto;
+  padding: var(--space-lg);
 }
 
-.profile-card{
+/* Components */
+.profile-card {
   display: flex;
   gap: var(--space-lg);
   align-items: center;
@@ -16,7 +16,7 @@
   box-shadow: var(--shadow);
 }
 
-.profile-avatar{
+.profile-avatar {
   min-width: 120px;
   min-height: 120px;
   width: 120px;
@@ -29,59 +29,66 @@
   border: 1px solid rgba(115,95,72,0.06);
 }
 
-.profile-avatar img{
+.profile-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.avatar-fallback{
+.avatar-fallback {
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
   font-weight: 700;
   color: var(--accent-dark);
-  background: linear-gradient(135deg,#f7f3ee,#efe9dd);
+  background: linear-gradient(135deg, #f7f3ee, #efe9dd);
 }
 
-.profile-info{
+.profile-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
-.profile-name{
+.profile-name {
   font-size: 1.45rem;
   margin: 0;
-  color: #382e1f;
+  color: var(--text);
 }
 
-.profile-email{
+.profile-email {
   font-size: 0.95rem;
   color: var(--muted);
   margin: 0.1rem 0 0.6rem 0;
 }
 
-.profile-bio{
-  color: #5d4a37;
+.profile-bio {
+  color: var(--muted);
   line-height: 1.55;
   margin-bottom: 0.7rem;
 }
 
-.profile-actions{
+.profile-actions {
   display: flex;
   gap: 0.6rem;
   margin-top: 0.6rem;
 }
 
-@media (max-width: 720px){
-  .profile-card{
+/* Responsive */
+@media (max-width: 720px) {
+  .profile-card {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
   }
-  .profile-avatar{margin: 0 auto}
-  .profile-actions{justify-content: center}
+
+  .profile-avatar {
+    margin: 0 auto;
+  }
+
+  .profile-actions {
+    justify-content: center;
+  }
 }
