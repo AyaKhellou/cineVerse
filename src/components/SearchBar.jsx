@@ -1,21 +1,22 @@
 import { Search } from 'lucide-react';
-import React from 'react';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SearchBar(){
     const navigate = useNavigate();
+    const [search, setSearch] = useState(null);
+    console.log(search);
+    
 
     function searchMovie(e){
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const searchValue = formData.get('search')
-        
-        navigate(`search?query=${searchValue}`)
+        navigate(`search?query=${search}`)
+        setSearch('')
     }
 
     return(
         <form className="searchBar" onSubmit={searchMovie}>
-            <input type="text" name='search' />
+            <input type="text" name='search' value={search} onChange={(e)=> setSearch(e.target.value)} />
             <button type="submit">
                 <Search/>
             </button>
