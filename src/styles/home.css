@@ -15,6 +15,12 @@
   overflow: hidden;
   box-shadow: var(--shadow);
 }
+@media (max-width:800px){
+  .trending{
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 .trending::before {
   content: "";

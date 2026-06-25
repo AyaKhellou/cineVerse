@@ -6,7 +6,7 @@ Users can browse trending movies, search for titles, explore genres, view detail
 
 ## Live Demo
 
-[live]
+[[live](https://cineverse-we.netlify.app/)]
 
 ## Screenshots
 
