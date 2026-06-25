@@ -10,7 +10,12 @@ Users can browse trending movies, search for titles, explore genres, view detail
 
 ## Screenshots
 
-[Add screenshots or GIFs here]
+![alt text](./public/image.png)
+![alt text](./public/image-1.png)
+![alt text](./public/image-2.png)
+![alt text](./public/image-3.png)
+![alt text](./public/image-4.png)
+![alt text](./public/image-5.png)
 
 ## Features
 
